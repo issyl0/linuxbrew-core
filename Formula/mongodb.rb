@@ -60,6 +60,10 @@ class Mongodb < Formula
     # New Go tools have their own build script but the server scons "install" target is still
     # responsible for installing them.
     cd "src/mongo/gotools" do
+      unless OS.mac?
+        inreplace "vendor/src/github.com/google/gopacket/pcap/pcap.go", "_Ctype_struct_", "C.struct_"
+      end
+
       inreplace "build.sh" do |s|
         s.gsub! "$(git describe)", version.to_s
         s.gsub! "$(git rev-parse HEAD)", "homebrew"
