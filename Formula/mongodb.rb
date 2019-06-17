@@ -23,6 +23,7 @@ class Mongodb < Formula
   depends_on "python@2"
 
   unless OS.mac?
+    depends_on "curl"
     depends_on "pkg-config" => :build
     depends_on "libpcap"
   end
