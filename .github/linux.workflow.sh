@@ -17,7 +17,7 @@ do
   chmod +x /usr/bin/$i
 done
 
-CORE_DIR="$(brew --repo linuxbrew/core)"
+CORE_DIR="$(brew --repo homebrew/core)"
 mkdir -p "$CORE_DIR"
 rm -rf "$CORE_DIR"
 ln -s "$PWD" "$CORE_DIR"
@@ -26,6 +26,8 @@ ln -s "$PWD" "$CORE_DIR"
 git -C "$CORE_DIR" fetch
 git -C "$CORE_DIR" checkout -f master
 git -C "$CORE_DIR" reset --hard origin/master
+
+git -C "$CORE_DIR" remote -v
 
 # setup Homebrew environment
 export HOMEBREW_NO_AUTO_UPDATE=1
