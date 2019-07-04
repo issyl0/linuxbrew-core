@@ -17,7 +17,7 @@ do
   chmod +x /usr/bin/$i
 done
 
-CORE_DIR="$(brew --repo homebrew/core)"
+CORE_DIR="$(brew --repo linuxbrew/core)"
 mkdir -p "$CORE_DIR"
 rm -rf "$CORE_DIR"
 ln -s "$PWD" "$CORE_DIR"
