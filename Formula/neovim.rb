@@ -1,20 +1,33 @@
 class Neovim < Formula
   desc "Ambitious Vim-fork focused on extensibility and agility"
   homepage "https://neovim.io/"
-  revision 2
 
   stable do
-    url "https://github.com/neovim/neovim/archive/v0.3.7.tar.gz"
-    sha256 "4c0f1b839ef2c8cfee63eb2a072324accf4f0c0badd2fbd087d3e7a12d538bca"
+    url "https://github.com/neovim/neovim/archive/v0.3.8.tar.gz"
+    sha256 "953e134568d824dad7cbf32ee3114951732f9a750c462e430e6b593f418af76c"
 
     depends_on "jemalloc"
   end
 
   bottle do
-    sha256 "7955703de89c1ea63cb5185b3bb6a61426d9add22321cd27882265179ede2207" => :mojave
-    sha256 "e6a01b6a91406aa0284dae08446ed6b845a465b14f90efef6c9ee7db5bd54268" => :high_sierra
-    sha256 "0874c9a239cc6d8964e44dcba2eac512bb7932b680eaf9a74e4370f8581f0083" => :sierra
-    sha256 "838d78b51eff6d2cb7fa96a0094f80167d1724d0a388f7ac09cc23324dd0a898" => :x86_64_linux
+    sha256 "6cfd2fa392a29729a4bf46764efddc5462189d555d5c4910f960af2438ecf4a4" => :mojave
+    sha256 "97b6c3dc5dda485bd195650be9e060304e2a03ed2c62bdedf643876971726657" => :high_sierra
+    sha256 "3c46065de77aaa929da89748bbf3fe584fe6ef8d9d9919267c7a5bba3f2a345b" => :sierra
+    sha256 "9e9a880c5864b8020e22b3c58927d308d6a69a0466a07162a5b1bf9d3212e2aa" => :x86_64_linux
+  end
+
+  head do
+    url "https://github.com/neovim/neovim.git"
+
+    resource "lua-compat-5.3" do
+      url "https://github.com/keplerproject/lua-compat-5.3/archive/v0.7.tar.gz"
+      sha256 "bec3a23114a3d9b3218038309657f0f506ad10dfbc03bb54e91da7e5ffdba0a2"
+    end
+
+    resource "luv" do
+      url "https://github.com/luvit/luv/releases/download/1.30.0-0/luv-1.30.0-0.tar.gz"
+      sha256 "5cc75a012bfa9a5a1543d0167952676474f31c2d7fd8d450b56d8929dbebb5ef"
+    end
   end
 
   depends_on "cmake" => :build

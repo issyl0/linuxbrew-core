@@ -4,12 +4,14 @@ class Istioctl < Formula
   url "https://github.com/istio/istio.git",
       :tag      => "1.2.2",
       :revision => "cd4a148f37dc386986d6a6d899778849e686beea"
+  revision 1 unless OS.mac?
 
   bottle do
     cellar :any_skip_relocation
     sha256 "a22c0b1940f87fce7f6f68637f047392f621d2fdfdac86107d2aa012b85ce96f" => :mojave
     sha256 "890f09e0d2f7ba73eeb5557face0691fab1c916082373f3fe0f4801b90de9ea7" => :high_sierra
     sha256 "07b42a7d9e0c97094de4fd86c151a060380ef22853ce0b20593e57d8dac33e8f" => :sierra
+    sha256 "38d1d91a39dd70f28eb9ae03b47f4a020be9b0ba4cfbfaf0cea89e6ca8998650" => :x86_64_linux
   end
 
   depends_on "go" => :build
@@ -20,7 +22,11 @@ class Istioctl < Formula
     ENV["ISTIO_VERSION"] = version.to_s
 
     srcpath = buildpath/"src/istio.io/istio"
-    outpath = buildpath/"out/darwin_amd64/release"
+    if OS.mac?
+      outpath = buildpath/"out/darwin_amd64/release"
+    else
+      outpath = buildpath/"out/linux_amd64/release"
+    end
     srcpath.install buildpath.children
 
     cd srcpath do
