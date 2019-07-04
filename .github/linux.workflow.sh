@@ -43,13 +43,14 @@ git config --global core.sshCommand "ssh -i ~/.ssh/id_ed25519 -o UserKnownHostsF
 # clone formulae.brew.sh with SSH so we can push back
 git clone git@github.com:issyl0/formulae.brew.sh
 cd formulae.brew.sh
+git checkout generated_linux_formulae
 
 # setup analytics
 echo "$ANALYTICS_JSON_KEY" > ~/.homebrew_analytics.json
 unset HOMEBREW_NO_ANALYTICS
 
 # run rake (without a rake binary)
-ruby -e "load Gem.bin_path('rake', 'rake')"
+ruby -e "load Gem.bin_path('rake', 'rake linux_formula_and_analytics')"
 
 # commit and push generated files
 git add _data/formula-linux api/formula-linux formula-linux
