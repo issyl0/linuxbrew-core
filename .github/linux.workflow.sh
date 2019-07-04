@@ -52,10 +52,10 @@ echo "$ANALYTICS_JSON_KEY" > ~/.homebrew_analytics.json
 unset HOMEBREW_NO_ANALYTICS
 
 # run rake (without a rake binary)
-ruby -e "load Gem.bin_path('rake', 'rake'); system('rake linux_formulae_and_analytics');"
+ruby -e "load Gem.bin_path('rake', 'rake'); system('rake formulae_linux');"
 
 # commit and push generated files
 git add _data/formula-linux api/formula-linux formula-linux
-git diff --exit-code HEAD -- _data/analytics-linux _data/formula-linux api/formula-linux formula-linux && exit 0
-git commit -m 'formula: update from Homebrew/linuxbrew-core push' _data/analytics-linux _data/formula-linux api/formula-linux formula-linux
+git diff --exit-code HEAD -- _data/formula-linux api/formula-linux formula-linux && exit 0
+git commit -m 'formula: update from Homebrew/linuxbrew-core push' _data/formula-linux api/formula-linux formula-linux
 git push
