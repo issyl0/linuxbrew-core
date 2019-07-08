@@ -17,7 +17,7 @@ do
   chmod +x /usr/bin/$i
 done
 
-CORE_DIR="$(brew --repo linuxbrew/core)"
+CORE_DIR="$(brew --repo homebrew/core)"
 mkdir -p "$CORE_DIR"
 rm -rf "$CORE_DIR"
 ln -s "$PWD" "$CORE_DIR"
@@ -32,7 +32,6 @@ git -C "$CORE_DIR" remote -v
 # setup Homebrew environment
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_FORCE_HOMEBREW_ON_LINUX=1
 export PATH="$(brew --repo)/Library/Homebrew/vendor/portable-ruby/current/bin:$PATH"
 
 # setup SSH
