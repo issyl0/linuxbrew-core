@@ -17,6 +17,7 @@ class Gpgme < Formula
   depends_on "graphviz" => :build
   depends_on "pkg-config" => :build
   depends_on "python" => [:build, :test]
+  depends_on "python@2" => [:build, :test] unless OS.mac?
   depends_on "qt" => [:build, :test]
   depends_on "swig" => :build
   depends_on "cmake" => :test
