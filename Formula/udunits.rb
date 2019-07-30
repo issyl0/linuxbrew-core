@@ -12,8 +12,11 @@ class Udunits < Formula
 
   depends_on "cmake" => :build
   uses_from_macos "expat"
+  depends_on "texinfo" unless OS.mac?
 
   def install
+    ENV.append "LDFLAGS", "-ldl" unless OS.mac?
+
     mkdir "build" do
       system "cmake", "..", *std_cmake_args
       system "make", "install"
