@@ -36,31 +36,33 @@ class Fakeroot < Formula
                           "--disable-silent-rules",
                           "--prefix=#{prefix}"
 
-    # Yosemite introduces an openat function, which has variadic arguments,
-    # which the "fancy" wrapping scheme used by fakeroot does not handle. So we
-    # have to patch the generated file after it is generated.
-    # Patch has been submitted with detailed explanation to
-    # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=766649
-    system "make", "wraptmpf.h"
-    (buildpath/"patch-for-wraptmpf-h").write <<~EOS
-      diff --git a/wraptmpf.h b/wraptmpf.h
-      index dbfccc9..0e04771 100644
-      --- a/wraptmpf.h
-      +++ b/wraptmpf.h
-      @@ -575,6 +575,10 @@ static __inline__ int next_mkdirat (int dir_fd, const char *pathname, mode_t mod
-       #endif /* HAVE_MKDIRAT */
-       #ifdef HAVE_OPENAT
-       extern int openat (int dir_fd, const char *pathname, int flags, ...);
-      +static __inline__ int next_openat (int dir_fd, const char *pathname, int flags, mode_t mode) __attribute__((always_inline));
-      +static __inline__ int next_openat (int dir_fd, const char *pathname, int flags, mode_t mode) {
-      +  return openat (dir_fd, pathname, flags, mode);
-      +}
+    if OS.mac?
+      # Yosemite introduces an openat function, which has variadic arguments,
+      # which the "fancy" wrapping scheme used by fakeroot does not handle. So we
+      # have to patch the generated file after it is generated.
+      # Patch has been submitted with detailed explanation to
+      # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=766649
+      system "make", "wraptmpf.h"
+      (buildpath/"patch-for-wraptmpf-h").write <<~EOS
+        diff --git a/wraptmpf.h b/wraptmpf.h
+        index dbfccc9..0e04771 100644
+        --- a/wraptmpf.h
+        +++ b/wraptmpf.h
+        @@ -575,6 +575,10 @@ static __inline__ int next_mkdirat (int dir_fd, const char *pathname, mode_t mod
+         #endif /* HAVE_MKDIRAT */
+         #ifdef HAVE_OPENAT
+         extern int openat (int dir_fd, const char *pathname, int flags, ...);
+        +static __inline__ int next_openat (int dir_fd, const char *pathname, int flags, mode_t mode) __attribute__((always_inline));
+        +static __inline__ int next_openat (int dir_fd, const char *pathname, int flags, mode_t mode) {
+        +  return openat (dir_fd, pathname, flags, mode);
+        +}
 
-       #endif /* HAVE_OPENAT */
-       #ifdef HAVE_RENAMEAT
-    EOS
+         #endif /* HAVE_OPENAT */
+         #ifdef HAVE_RENAMEAT
+      EOS
 
-    system "patch < patch-for-wraptmpf-h"
+      system "patch < patch-for-wraptmpf-h"
+    end
 
     system "make"
     system "make", "install"
