@@ -1,3 +1,4 @@
+# translate-shell: Build a bottle for Linuxbrew
 class TranslateShell < Formula
   desc "Command-line translator using Google Translate and more"
   homepage "https://www.soimort.org/translate-shell"
@@ -16,6 +17,7 @@ class TranslateShell < Formula
   depends_on "fribidi"
   depends_on "gawk"
   depends_on "rlwrap"
+  depends_on "util-linux" unless OS.mac?
 
   def install
     system "make"
