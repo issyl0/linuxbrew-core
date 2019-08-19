@@ -3,6 +3,7 @@ class Minikube < Formula
   homepage "https://github.com/kubernetes/minikube"
   url "https://github.com/kubernetes/minikube/archive/v1.3.1.tar.gz"
   sha256 "7aa57e5896852c499f1687fbc424abf93645e1801fc9f8c2833e0affbb76eb41"
+  # tag "linuxbrew"
 
   bottle do
     cellar :any_skip_relocation

@@ -3,6 +3,7 @@ class Singularity < Formula
   homepage "https://www.sylabs.io/singularity/"
   url "https://github.com/singularityware/singularity/releases/download/2.6.0/singularity-2.6.0.tar.gz"
   sha256 "7c425211a099f6fa6f74037e6e17be58fb5923b0bd11aea745e48ef83c488b49"
+  # tag "linuxbrew"
 
   bottle do
     root_url "https://linuxbrew.bintray.com/bottles-extra"

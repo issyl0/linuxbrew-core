@@ -4,6 +4,7 @@ class LinuxPam < Formula
   url "https://github.com/linux-pam/linux-pam/releases/download/v1.3.1/Linux-PAM-1.3.1.tar.xz"
   sha256 "eff47a4ecd833fbf18de9686632a70ee8d0794b79aecb217ebd0ce11db4cd0db"
   head "https://github.com/linux-pam/linux-pam.git"
+  # tag "linuxbrew"
 
   bottle do
     root_url "https://linuxbrew.bintray.com/bottles-extra"
