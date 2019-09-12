@@ -30,8 +30,9 @@ class Pulseaudio < Formula
 
   unless OS.mac?
     depends_on "m4" => :build
-    depends_on "libcap"
     depends_on "expat"
+    depends_on "glib"
+    depends_on "libcap"
 
     # Depends on XML::Parser
     # Using the host's Perl interpreter to install XML::Parser fails when using brew's glibc.
