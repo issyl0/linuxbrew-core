@@ -7,8 +7,14 @@ class ZshLovers < Formula
 
   bottle :unneeded
 
+  unless OS.mac?
+    depends_on "binutils" => :build
+    depends_on "xz" => :build
+    depends_on "man" => :test
+  end
+
   def install
-    system "tar", "xf", "zsh-lovers_#{version}_all.deb"
+    system (OS.mac? ? "tar" : "ar"), "xf", "zsh-lovers_#{version}_all.deb"
     system "tar", "xf", "data.tar.xz"
     system "gunzip", *Dir["usr/**/*.gz"]
     prefix.install_metafiles "usr/share/doc/zsh-lovers"
